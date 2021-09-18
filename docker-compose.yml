@@ -8,9 +8,6 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/php/Dockerfile
-      args:
-        - UID=${UID}
-        - GID=${GID}
     volumes:
       - type: volume
         source: php-fpm-socket
@@ -37,9 +34,6 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/nginx/Dockerfile
-      args:
-        - UID=${UID}
-        - GID=${GID}
     ports:
       - target: 3210
         published: ${WEB_PORT:-3210}
@@ -59,9 +53,6 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/mysql/Dockerfile
-      args:
-        - UID=${UID}
-        - GID=${GID}
     ports:
       - target: 3306
         published: ${DB_PORT:-3306}
