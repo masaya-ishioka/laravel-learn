@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// laravel8より使用するコントローラーを記載する必要がある。
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 旧記載方法　Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index')
+// 下記laravel8からの記載方法
+
+Route::get('/folders/{id}/tasks', [TaskController::class, 'index'])->name('tasks.index');

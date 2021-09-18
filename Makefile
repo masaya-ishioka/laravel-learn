@@ -64,6 +64,8 @@ log-db-watch:
 	docker compose logs --follow db
 web:
 	docker compose exec -u 1000:1000 web ash
+appuser:
+	docker compose exec app bash
 app:
 	docker compose exec -u 1000:1000 app bash
 migrate:
