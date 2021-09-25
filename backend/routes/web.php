@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 // laravel8より使用するコントローラーを記載する必要がある。
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\FolderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::get('/', function () {
 // 下記laravel8からの記載方法
 
 Route::get('/folders/{id}/tasks', [TaskController::class, 'index'])->name('tasks.index');
+
+Route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
+Route::post('/folders/create', [FolderController::class, 'create']);
+
