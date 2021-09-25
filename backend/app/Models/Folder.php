@@ -11,6 +11,6 @@ class Folder extends Model
 
     public function tasks() {
         // 下記は省略記載、本来は $this->hasMany('App\Models\Task', 'folder_id', 'id');
-        return $this->hasMany('App\Models\Task');
+        return $this->hasMany('App\Models\Task', 'folder_id', 'id');
     }
 }
