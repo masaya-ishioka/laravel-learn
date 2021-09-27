@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Requests\CreateTask;
+use App\Http\Requests\EditTask;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -50,6 +51,22 @@ class TaskTest extends TestCase
 
         $response->assertSessionHasErrors([
             'due_date' => '期限日 には今日以降の日付を入力してください。',
+        ]);
+    }
+    /**
+     * 状態が定義された値ではない場合はバリデーションエラー
+     * @test
+     */
+    public function status_should_be_within_defined_numbers()
+    {
+        $response = $this->post('/folders/1/tasks/1/edit', [
+            'title' => 'Sample task',
+            'due_date' => Carbon::today()->format('Y/m/d'),
+            'status' => 999,
+        ]);
+
+        $response->assertSessionHasErrors([
+            'status' => '状態 には 未着手、着手中、完了 のいずれかを指定してください。',
         ]);
     }
 }
