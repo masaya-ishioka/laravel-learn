@@ -12,13 +12,21 @@
 
 ```
 $ php artisan make:migration フォルダ名 --create=テーブル名(複数形)
+```
+
+マイグレーションファイル作成(カラム追加)
 
 ```
+$ php artisan make:migration フォルダ名 --table=テーブル名(複数形)
+```
+
 
 マイグレーション実行
 
 ```
-$ php artisan make:migrate
+$ php artisan migrate
+
+$ php artisan migrate:fresh
 ```
 
 シーダー作成
@@ -49,4 +57,16 @@ FormRequestクラス（バリデーション用）
 
 ```
 $ php artisan make:request 任意の名称
+```
+
+認証系ファイル作成
+
+```
+php artisan ui:auth
+```
+
+ルートリスト確認
+
+```
+$ php artisan route:list
 ```

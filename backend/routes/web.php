@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 // laravel8より使用するコントローラーを記載する必要がある。
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FolderController;
-
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +16,9 @@ use App\Http\Controllers\FolderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // 旧記載方法　Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index')
 // 下記laravel8からの記載方法
@@ -33,3 +33,7 @@ Route::post('/folders/{id}/tasks/create', [TaskController::class, 'create']);
 
 Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'showEditForm'])->name('tasks.edit');
 Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'edit']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
