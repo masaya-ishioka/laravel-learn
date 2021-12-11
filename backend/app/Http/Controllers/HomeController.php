@@ -4,19 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
-	public function index()
-	{
-		$user = Auth::user();
-		$folder = $user->folders()->first();
+    public function index()
+    {
+        // ログインユーザーを取得する
+        $user = Auth::user();
 
-		if (is_null($folder)) {
-			return view('home');
-		}
+        // ログインユーザーに紐づくフォルダを一つ取得する
+        $folder = $user->folders()->first();
 
-		return redirect()->route('task.index', [
-			'id' => $folder-id,
-		]);
-	}
+        // まだ一つもフォルダを作っていなければホームページをレスポンスする
+        if (is_null($folder)) {
+            return view('home');
+        }
+
+        // フォルダがあればそのフォルダのタスク一覧にリダイレクトする
+        return redirect()->route('tasks.index', [
+            'folder' => $folder,
+        ]);
+    }
 }
